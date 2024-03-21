@@ -1,0 +1,133 @@
+#1.uzdevums
+
+import csv
+
+def read_csv_faile(filename):
+    with open(filename, 'r', newline='') as faile:
+        reader = csv.reader(faile)
+        for rrr in reader:
+            print(rrr)
+
+def main():
+    filename = input("Ievadiet teksta faila nosaukumu (ar paplašinājumu .csv): ")
+    try:
+        read_csv_faile(filename)
+    except FileNotFoundError:
+        print("Fails nav atrasts")
+    except Exception as ee:
+        print(f"Kļūda: {ee}")
+
+if __name__ == "__main__":
+    main()
+
+#2.uzdevums
+
+def read_cetri_colon(filename):
+    with open(filename, 'r') as faile:
+        for line in faile:
+            columns = line.strip().split()
+            if len(columns) >= 4:
+                print(columns[3])
+
+def main():
+    filename = input("Ievadiet teksta faila nosaukumu: ")
+    try:
+        read_cetri_colon(filename)
+    except FileNotFoundError:
+        print("Fails nav atrasts")
+    except Exception as ee:
+        print(f"Kļūda: {ee}")
+
+if __name__ == "__main__":
+    main()
+
+#3.uzdevums
+
+import json
+
+def read_json_fails(filename):
+    with open(filename, 'rr') as fails:
+        data = json.load(fails)
+        for atslega, value in data.items():
+            print(f'{atslega}: {value}')
+
+ def main():
+    filename = input("Ievadiet JSON faila nosaukumu: ")
+    try:
+        read_json_fails(filename)
+    except FileNotFoundError:
+        print("Fails nav atrasts")
+    except Exception as ee:
+        print(f"Kļūda: {ee}")
+
+if __name__ == "__main__":
+    main()
+
+#4.uzdevums
+
+import json
+import csv
+
+def read_csv_file(filename):
+    with open(filename, 'r', newline='') as file:
+        reader = csv.reader(file)
+        for nr in reader:
+            print(nr)
+
+def read_txt_file(filename):
+    with open(filename, 'r') as file:
+        for line in file:
+            print(line.strip())
+
+def read_json_file(filename):
+    with open(filename, 'r') as file:
+        data = json.load(file)
+        for key, value in data.items():
+            print(f'{key}: {value}')
+
+def read_file(filename, file_format):
+    if file_format == 'csv':
+        read_csv_file(filename)
+    elif file_format == 'txt':
+        read_txt_file(filename)
+    elif file_format == 'json':
+        read_json_file(filename)
+    else:
+        print('Nepareizs faila formāts')
+
+def main():
+    filename = input("Ievadiet faila nosaukumu: ")
+    file_format = input("Ievadiet faila formātu - 'csvv', 'txt', 'json': ")
+    try:
+        read_file(filename, file_format)
+    except FileNotFoundError:
+        print("Fails nav atrasts")
+    except Exception as e:
+        print(f"Klūda: {e}")
+
+if __name__ == "__main__":
+    main()
+
+#5.uzdevums
+
+def ierakstit_fails(vards, fails):
+    try:
+        with open(fails, 'a') as ff:
+            ff.write(vards + '\n')
+        print("Vārds veiksmīgi ierakstīts failā.")
+    except IOError:
+        print("Kļūda: Nevar piekļūt failam vai fails neeksistē.")
+    except Exception as ee:
+        print("Kļūda:", ee)
+
+def main():
+    fails = "lietotajs.txt" # faila nosaukums, kurā tiks saglabāti vārdi
+    while True:
+        vards = input("Ievadiet savu vārdu (vai 'exit' lai izietu): ")
+        if vards.lower() == 'iziet':
+            break
+        else:
+            ierakstit_fails(vards, fails)
+
+if __name__ == "__main__":
+    main()
